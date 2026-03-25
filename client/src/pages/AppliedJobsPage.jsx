@@ -44,7 +44,11 @@ const AppliedJobsPage = () => {
 
       {applications.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">/* Icon Placeholder */</div>
+          <div className="empty-state-icon">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.2 }}>
+              <rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+            </svg>
+          </div>
           <h3>You haven't applied to any jobs yet</h3>
           <p>Start browsing and apply to your first job</p>
           <Link to="/jobs" className="btn btn-primary">Browse Jobs</Link>

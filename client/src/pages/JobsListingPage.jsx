@@ -96,7 +96,11 @@ const JobsListingPage = () => {
         </div>
       ) : filteredJobs.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">/* Icon Placeholder */</div>
+          <div className="empty-state-icon">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.2 }}>
+              <circle cx="12" cy="12" r="10"/><line x1="22" x2="16.65" y1="22" y2="16.65"/><line x1="11" x2="11" y1="8" y2="16"/><line x1="8" x2="14" y1="11" y2="11"/>
+            </svg>
+          </div>
           <h3>No jobs found</h3>
           <p>Try adjusting your search or filters</p>
         </div>
