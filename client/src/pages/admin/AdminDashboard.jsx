@@ -8,58 +8,46 @@ const AdminDashboard = () => {
   const { myJobs, isLoading } = useSelector((state) => state.jobs);
   const { user } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    dispatch(getMyJobs());
-  }, [dispatch]);
+  useEffect(() => { dispatch(getMyJobs()); }, [dispatch]);
+
+  const totalJobs = myJobs.length;
 
   return (
     <div className="page-container fade-in">
-      <div className="page-header">
-        <h1>Admin Dashboard</h1>
-        <Link to="/admin/jobs/new" className="btn btn-primary">
-          + Post New Job
-        </Link>
+      {/* Welcome Card */}
+      <div className="welcome-banner">
+        <h2>Welcome, Admin {user?.name}</h2>
+        <p>Manage your job listings and track applications</p>
       </div>
 
-      {/* Stats Cards */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-          gap: 'var(--space-lg)',
-          marginBottom: 'var(--space-xl)',
-        }}
-      >
-        <div className="card">
-          <div className="card-body" style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--color-accent)' }}>
-              {isLoading ? '...' : myJobs.length}
-            </div>
-            <div style={{ color: '#64748B', fontSize: '0.9rem', marginTop: '4px' }}>
-              Jobs Posted
-            </div>
+      {/* Stats Row */}
+      <div className="stats-grid">
+        <div className="card stat-card">
+          <div className="card-body">
+            <div className="stat-value">{isLoading ? '...' : totalJobs}</div>
+            <div className="stat-label">Total Jobs Posted</div>
           </div>
         </div>
-        <div className="card">
-          <div className="card-body" style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--color-accent)' }}>
-              {user?.name}
+        <div className="card stat-card">
+          <div className="card-body">
+            <div className="stat-value">{isLoading ? '...' : '—'}</div>
+            <div className="stat-label">Total Applications</div>
+          </div>
+        </div>
+        <div className="card stat-card">
+          <div className="card-body">
+            <div className="stat-value" style={{ fontSize: '1.2rem' }}>
+              {isLoading ? '...' : (myJobs[0]?.position || '—')}
             </div>
-            <div style={{ color: '#64748B', fontSize: '0.9rem', marginTop: '4px' }}>
-              Welcome back!
-            </div>
+            <div className="stat-label">Most Recent Job</div>
           </div>
         </div>
       </div>
 
-      {/* Quick Links */}
+      {/* Quick Actions */}
       <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
-        <Link to="/admin/jobs" className="btn btn-outline">
-          📋 Manage Jobs
-        </Link>
-        <Link to="/admin/jobs/new" className="btn btn-outline">
-          ✏️ Create New Job
-        </Link>
+        <Link to="/admin/jobs/new" className="btn btn-primary btn-lg">+ Post New Job</Link>
+        <Link to="/admin/jobs" className="btn btn-outline btn-lg">📋 View All My Jobs</Link>
       </div>
     </div>
   );
